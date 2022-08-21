@@ -1,0 +1,6 @@
+source .env
+
+export FACTORY=0x7E0175Bc795c117E6f01B2E4e5dCb85bd7EFae29
+export MINT_PRICE=10000000000000000
+
+cast send --private-key=$PRIVATE_KEY $FACTORY "setPrice(uint256)" $MINT_PRICE --rpc-url $GOERLI_RPC_URL

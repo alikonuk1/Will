@@ -23,8 +23,9 @@ contract Will {
         _;
     }
 
-    constructor(address _owner, uint256 _expiration) {
+    constructor(address _owner, address _guardian, uint256 _expiration) {
         Owner = _owner;
+        guardian = _guardian;
         expiration = block.timestamp + _expiration;
     }
 
@@ -34,10 +35,6 @@ contract Will {
 
     function setExtension(uint256 _extension) external onlyOwner expiredCheck {
         expiration = block.timestamp + timeLeft() + _extension;
-    }
-
-    function setGuardian(address _guardian) external onlyOwner {
-        guardian = _guardian;
     }
 
     function getGuardian() external view onlyOwner returns (address) {

@@ -9,7 +9,7 @@ contract WillFactory {
 
     error PriceNotPaid();
 
-    event NewWill(address, address);
+    event NewWill(address, address, uint256, address);
 
     uint256 public price;
     address public admin;
@@ -36,12 +36,12 @@ contract WillFactory {
         require(sent, "Failed to send Ether to admin");
     }
 
-    function buildWill(address owner, uint256 expiration) public payable {
+    function buildWill(address owner, address guardian, uint256 expiration) public payable {
         if (msg.value != price) {
             revert PriceNotPaid();
         }
-        Will w = new Will(owner, expiration);
+        Will w = new Will(owner, guardian, expiration);
         console.log("Will contract:", address(w));
-        emit NewWill(owner, address(w));
+        emit NewWill(owner, guardian, expiration, address(w));
     }
 }

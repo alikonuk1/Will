@@ -16,20 +16,10 @@ contract WillTest is Test {
         owner = address(0xB0B);
         guardian = address(0xA11ce);
 
-        will = new Will(owner, 60);
+        will = new Will(owner, guardian, 60);
         
         //top up the owner account with ETH
         owner.call{value: 90 ether}("");
-    }
-
-    function test_SetGuardian() public {
-        vm.prank(owner);
-
-        will.setGuardian(address(guardian));
-
-        emit log_address(address(guardian));
-
-        assertEq(address(guardian), guardian);
     }
 
     function test_SetExtension() public {

@@ -27,7 +27,7 @@ contract WillTest is Test {
         vm.prank(owner);
 
         address(willFactory).call{value: 0.01 ether}(abi.encode(address(owner)));
-        willFactory.buildWill(address(owner), 60);
+        willFactory.buildWill(address(owner), address(guardian), 60);
 
     }
 }
